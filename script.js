@@ -1,11 +1,29 @@
+var time=0;
+setInterval(() => {
+     time++;
+}, 1000);
 let set1,set2;
-const icon=["fas "]
-setTimeout(() => {
+const icon=["fas fa-apple-alt","fas fa-lemon","fas fa-carrot","fas fa-leaf","fas fa-pepper-hot","fas fa-seedling",
+   "fas fa-apple-alt","fas fa-carrot","fas fa-lemon","fas fa-leaf","fas fa-pepper-hot","fas fa-seedling"];
+   let style=["20%","30%","40%","50%","60%"];
+   let color=["red","purple","maroon","fuchsia","yellow","navy","blue","blueviolet","chocolate","darkkhaki","dimgray"];
+   var s=style[Math.floor(Math.random()*style.length)];
+   for(var k=0;k<=(11);k++)
+   {
+      var y=Math.floor(Math.random()*icon.length);
+      var x=icon[y];
+      document.getElementsByClassName("row")[k].innerHTML=`<i class="${x}"></i>`;
+      icon.splice(y,1);
+      console.log(icon);
+      console.log(icon.length);
+   }
+setTimeout(() =>{
     for(var i=0;i<=11;i++){
     document.getElementsByClassName("fas")[i].style.display="none";
-    document.getElementsByClassName("row")[i].style.backgroundColor="red";
+    document.getElementsByClassName("row")[i].style.backgroundColor=`${color[Math.floor(Math.random()*color.length)]}`;
+    document.getElementsByClassName("row")[i].style.borderRadius=`${s}`;
     }
-},5000);
+},7000);
 var row=[],fas=[];
 for(var i=0;i<=11;i++)
     {
@@ -13,6 +31,7 @@ for(var i=0;i<=11;i++)
         row[i]=document.getElementsByClassName("row")[i];
     }
      let sum=0;
+     let right=0;
      const simplegame=(i)=>{
      if(sum==0)
         {
@@ -34,15 +53,16 @@ const simplegame2=(set1,j)=>{
     document.getElementsByClassName("fas")[j].style.display="block";
     sum=0;
     if(set1[1].slice(10,-29)==secondset.slice(10,-29)){
-      console.log("matched");
-      // document.getElementsByClassName("fas")[j].style.display="none";
-      // document.getElementsByClassName("fas")[set1[0]].style.display="none";
+      right++;
+      if(right==6)
+      {
+         document.getElementsByClassName("container")[0].innerHTML=`<h1> welldone you solve in just ${time} seconds..once more 👉<a href="index.html">click</a> </h1>`;
+      }
       setTimeout(()=>{
           document.getElementsByClassName("row")[j].style.display="none";
       document.getElementsByClassName("row")[set1[0]].style.display="none";
       document.getElementsByClassName("fas")[j].style.display="none";
       document.getElementsByClassName("fas")[set1[0]].style.display="none";
-      
       },500);
     }
     else{ 
@@ -54,8 +74,6 @@ const simplegame2=(set1,j)=>{
      document.getElementsByClassName("row")[set1[0]].style.backgroundColor="red";
      },500)
     }
-      console.log(set1[1].slice(10,-29) +  secondset.slice(10,-29));
-    //    alert(secondset);
     return secondset;
 }
 row[0].addEventListener("click",()=>{
